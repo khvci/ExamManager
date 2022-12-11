@@ -3,7 +3,7 @@ package Entities;
 import java.util.List;
 
 public class Exam {
-    private Question[] questions;
+    private List<Question> questions;
     private String type;
 
     public Exam(List<Question> questions, String type) {
@@ -13,7 +13,7 @@ public class Exam {
 
 
 
-    public Question[] getQuestions() {
+    public List<Question> getQuestions() {
         return this.questions;
     }
 
@@ -21,4 +21,15 @@ public class Exam {
         return this.type;
     }
 
+    public String getExamType() {
+        return this.type;
+    }
+
+    public int getScore() {
+        int totalScore = 0;
+        for (Question question : questions) {
+            totalScore += question.getScore();
+        }
+        return totalScore;
+    }
 }

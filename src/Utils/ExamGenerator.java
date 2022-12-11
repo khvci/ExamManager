@@ -5,6 +5,7 @@ import Entities.Exam;
 import Entities.MultipleChoiceQuestion;
 import Entities.Question;
 
+import java.io.FileWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,7 +77,7 @@ türüdür.
     //sorulmalı ve sınav cevapları ile birlikte "sinav.txt" adlı bir
     //dosyaya kaydedilmelidir. Sadece test sınavları için sınav
     //sonunda sınavdan alınan not ekranda yazılmalıdır
-    public static void printExam(Exam exam) {
+    public static List<Question> printExam(Exam exam) {
         System.out.println("Sınav Türü: " + exam.getExamType());
         System.out.println("Sınav Soruları:");
         for (Question question : exam.getQuestions()) {
@@ -85,9 +86,20 @@ türüdür.
         if (exam.getExamType().equals("test")) {
             System.out.println("Sınav Notu: " + exam.getScore());
         }
+        return exam.getQuestions();
 
-    }
-    public static List<Question> getExamQuestions() {
-        return examQuestions;
-    }
+
 }
+
+    public static void saveExam(Exam exam) {
+        try {
+            FileWriter fileWriter = new FileWriter("sinav.txt");
+            fileWriter.write("Sınav Türü: " + exam.getExamType() + "    " +
+                    "Sınav Soruları: " + exam.getQuestions());
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("Dosya oluşturulamadı");
+        }
+    }
+    }
+

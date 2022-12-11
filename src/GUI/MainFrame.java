@@ -127,16 +127,19 @@ public class MainFrame extends JFrame {
                             // Test sınavı oluşturma ExamGenerator.generateExam(List<Question> questionBank, String examType) methodunu kullanarak
                             exam = ExamGenerator.generateExam(QuestionsManager.getQuestions(), "Test");
                             ExamGenerator.printExam(exam);
+                            ExamGenerator.saveExam(exam);
                             break;
                         case 1:
                             // Klasik sınav oluşturma ExamGenerator.generateExam(List<Question> questionBank, String examType) methodunu kullanarak
                             exam = ExamGenerator.generateExam(QuestionsManager.getQuestions(), "Klasik");
                             ExamGenerator.printExam(exam);
+                            ExamGenerator.saveExam(exam);
                             break;
                         case 2:
                             // Karışık sınav oluşturma ExamGenerator.generateExam(List<Question> questionBank, String examType) methodunu kullanarak
                             exam = ExamGenerator.generateExam(QuestionsManager.getQuestions(), "Karışık");
                             ExamGenerator.printExam(exam);
+                            ExamGenerator.saveExam(exam);
                             break;
                     }
                 });
