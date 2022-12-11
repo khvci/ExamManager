@@ -12,6 +12,10 @@ public class QuestionsManager {
         this.questions = new ArrayList<>();
     }
 
+    public static List<Question> getQuestions() {
+        return questions;
+    }
+
     // Soru ekleme metodu
     public static void addQuestion(Question question) {
         questions.add(question);
@@ -48,6 +52,9 @@ public class QuestionsManager {
     // Soru bankasındaki soruları listeleme metotları:
     // Sorular Comparable arayüzünü gerçekleştirdiği için puanlarına göre küçükten büyüğe doğru sıralanmıştır.
 
+    public static List<Question> listAllQuestions() {
+        return questions;
+    }
     public static List<Question> listQuestionsByText(String text) {
         // Soru metni içinde arama yapmak için metot
         List<Question> filteredQuestions = new ArrayList<>();
@@ -105,7 +112,7 @@ public class QuestionsManager {
         return filteredQuestions;
     }
 
-    public static void listByUserChoice(int choice, String userInput) {
+    public static void listByUserChoice(String userInput, int choice) {
         switch (choice) {
             case 1:
                 listQuestionsByText(userInput);

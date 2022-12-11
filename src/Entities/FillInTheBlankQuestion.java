@@ -7,6 +7,6 @@ public class FillInTheBlankQuestion extends Question {
     }
 
     public String getCorrectAnswer() {
-        return this.correctAnswer;
+        return this.getCorrectAnswer();
     }
 }
