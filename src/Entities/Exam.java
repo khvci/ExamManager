@@ -11,8 +11,6 @@ public class Exam {
         this.type = type;
     }
 
-
-
     public List<Question> getQuestions() {
         return this.questions;
     }
