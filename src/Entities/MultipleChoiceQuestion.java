@@ -14,7 +14,10 @@ public class MultipleChoiceQuestion extends Question {
         return this.choices;
     }
 
-
+    @Override
+    public String getType() {
+        return "coktan_secmeli";
+    }
     public boolean checkAnswer(int choice) {
         return choices.get(choice).equalsIgnoreCase(this.getCorrectAnswer());
     }

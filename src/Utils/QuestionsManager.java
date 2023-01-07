@@ -1,15 +1,28 @@
 package Utils;
-
+import Entities.ClassicQuestion;
+import Entities.MultipleChoiceQuestion;
 import Entities.Question;
+import Entities.TrueFalseQuestion;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class QuestionsManager {
+    private static QuestionsManager instance;
     private static List<Question> questions; // Soru bankası
 
-    public QuestionsManager() {
+    private QuestionsManager() {
         this.questions = new ArrayList<>();
+    }
+
+    public static QuestionsManager getInstance() {
+        if (instance == null) {
+            instance = new QuestionsManager();
+        }
+        return instance;
     }
 
     public static List<Question> getQuestions() {
@@ -21,7 +34,6 @@ public class QuestionsManager {
     }
 
     public static void removeQuestion(String text) {
-
         Optional<Question> optionalQuestion = questions.stream()
                 .filter(q -> q.getText().contains(text))
                 .findFirst();

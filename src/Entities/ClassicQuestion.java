@@ -8,4 +8,9 @@ public class ClassicQuestion extends Question {
     public boolean checkAnswer(String answer) {
         return answer.equalsIgnoreCase(this.getCorrectAnswer());
     }
+
+    @Override
+    public String getType() {
+        return "klasik";
+    }
 }

@@ -5,18 +5,21 @@ import Entities.Exam;
 import Entities.MultipleChoiceQuestion;
 import Entities.Question;
 
-import java.io.FileWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// This class is responsible for generating exams using the Strategy Design Pattern
 public class ExamGenerator {
     private static List<Question> questionBank;
     private static List<Question> examQuestions;
 
-    public static Exam generateExam(List<Question> questionBank, String examType) {
+    // This method generates an exam based on the given exam type and difficulty level
+    public static Exam generateExam(List<Question> questionBank, String examType, String difficulty) {
         ExamGenerator.questionBank = questionBank;
         examQuestions = questionBank;
+
+        // Determine which questions to include in the exam based on the exam type
         switch (examType) {
             case "test":
                 examQuestions = questionBank.stream()
@@ -32,44 +35,29 @@ public class ExamGenerator {
                 examQuestions = questionBank;
                 break;
         }
-        Collections.shuffle(examQuestions);
-        int totalScore = 0;
-        for (Question question : examQuestions) {
-            totalScore += question.getScore();
-            if (totalScore > 110) {
-                examQuestions.remove(question);
+
+        // Filter the questions based on the difficulty level
+        switch (difficulty) {
+            case "zor":
+                examQuestions = examQuestions.stream()
+                        .filter(q -> q.getDifficulty().equals("zor") || q.getDifficulty().equals("orta"))
+                        .collect(Collectors.toList());
                 break;
-            }
+            case "orta":
+                examQuestions = examQuestions.stream()
+                        .filter(q -> q.getDifficulty().equals("zor") || q.getDifficulty().equals("orta") || q.getDifficulty().equals("kolay"))
+                        .collect(Collectors.toList());
+                break;
+            case "kolay":
+                examQuestions = examQuestions.stream()
+                        .filter(q -> q.getDifficulty().equals("orta") || q.getDifficulty().equals("kolay"))
+                        .collect(Collectors.toList());
+                break;
         }
 
+        // Shuffle the questions and create the exam object
+        Collections.shuffle(examQuestions);
         return new Exam(examQuestions, examType);
-
-
-
-    }
-
-    public static List<Question> printExam(Exam exam) {
-        System.out.println("Sınav Türü: " + exam.getExamType());
-        System.out.println("Sınav Soruları:");
-        for (Question question : exam.getQuestions()) {
-            System.out.println(question);
-        }
-        if (exam.getExamType().equals("test")) {
-            System.out.println("Sınav Notu: " + exam.getScore());
-        }
-        return exam.getQuestions();
-
-
-}
-
-    public static void saveExam(Exam exam) {
-        try {
-            FileWriter fileWriter = new FileWriter("sinav.txt");
-            fileWriter.write(exam.getQuestions().toString());
-            fileWriter.close();
-        } catch (Exception e) {
-            System.out.println("Dosya oluşturulamadı");
-        }
     }
 }
 
