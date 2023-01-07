@@ -5,6 +5,10 @@ public class TrueFalseQuestion extends Question {
         super(text, correctAnswer, score, difficulty);
     }
 
+    @Override
+    public String getType() {
+        return "dogru_yanlis";
+    }
     public boolean checkAnswer(String answer) {
         return answer.equalsIgnoreCase(this.getCorrectAnswer());
     }

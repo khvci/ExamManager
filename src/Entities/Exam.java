@@ -5,10 +5,12 @@ import java.util.List;
 public class Exam {
     private List<Question> questions;
     private String type;
+    private String difficulty;
 
-    public Exam(List<Question> questions, String type) {
+    public Exam(List<Question> questions, String type, String difficulty) {
         this.questions = questions;
         this.type = type;
+        this.difficulty = difficulty;
     }
 
     public List<Question> getQuestions() {
@@ -17,6 +19,10 @@ public class Exam {
 
     public String getType() {
         return this.type;
+    }
+
+    public String getDifficulty() {
+        return this.difficulty;
     }
 
     public String getExamType() {

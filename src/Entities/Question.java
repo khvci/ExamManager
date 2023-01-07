@@ -14,6 +14,8 @@ public abstract class Question implements Comparable<Question> {
         this.difficulty = difficulty;
     }
 
+    public abstract String getType();
+
     public String getText() {
         return text;
     }
